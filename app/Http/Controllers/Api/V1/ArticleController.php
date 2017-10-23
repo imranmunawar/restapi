@@ -22,11 +22,7 @@ class ArticleController extends APIController
         try {
             $articles = Article::where('id', '=', 1)->first();
             event( new FetchArticles($articles));
-            //foreach($articles as $article){
-            //    event( new FetchArticles($article));
-           // }
-            //$job = (new ProcessPodcast($articles))->onConnection('redis')->onQueue('processing')->onQueue('high');;
-            //dispatch($job);
+            $articles = Article::all();
             $return = $this->respondOK($articles);
         }catch (\Exception $ex) {
             dd($ex->getLine() . '  ' . $ex->getMessage());
